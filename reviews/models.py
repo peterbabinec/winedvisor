@@ -14,14 +14,34 @@ class Wine(models.Model):
     ph = models.FloatField()
     sulphates = models.FloatField()
     alcohol = models.FloatField()
-    quality = models.FloatField()
     color = models.CharField(max_length=16)
+
+    def __str__(self):
+        return '{0} {1}'.format(self.color, 'wine')
+
+
+class User(models.Model):
+    firstname = models.CharField(max_length=32)
+    lastname = models.CharField(max_length=32)
+    email = models.CharField(max_length=254)
+
+    def __str__(self):
+        return '{0} {1}'.format(self.firstname, self.lastname)
+
+
+class Review(models.Model):
+    rating = models.IntegerField()
+    body = models.TextField(max_length=500)
+    wine = models.ForeignKey(Wine)
+    user = models.ForeignKey(User)
+    pub_date = models.DateTimeField('date published', null=True)
 
     def average_quality(self):
         qualities = map(lambda x: x.quality, self.wine_set.all())
         return np.mean(qualities)
 
 
-    def __unicode__(self):
-        return '{0} {1}'.format(self.color, 'wine')
+
+
+
 
