@@ -5,7 +5,7 @@
     {% for wine in wine_list %}
     <div>
         <h4><a href="{% url 'reviews:wine_detail' wine.id %}">
-        {{ wine.name }}
+        {{ wine.color }}
         </a></h4>
         <h5>{{ wine.review_set.count }} reviews</h5>
         <h5>{{ wine.average_rating | floatformat }} average rating</h5>
