@@ -1,13 +1,18 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+{% block title %}
 <h2>{{ wine.name }}</h2>
 <h5>{{ wine.review_set.count }} reviews ({{ wine.average_rating | floatformat }} average rating)</h5>
+{% endblock %}
 
-
+{% block content %}
 <h3>Recent reviews</h3>
 
 {% if wine.review_set.all %}
-<div>
+<div class="row">
     {% for review in wine.review_set.all %}
-    <div>
+    <div class="col-xs-6 col-lg-4">
         <em>{{ review.comment }}</em>
         <h6>Rated {{ review.rating }} of 5 by {{ review.user_name }}</h6>
         <h5><a href="{% url 'reviews:review_detail' review.id %}">
@@ -25,6 +30,13 @@
 
 <form action="{% url 'reviews:add_review' wine.id %}" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Add" />
+    {% for field in form %}
+        {% bootstrap_field field %}
+    {% endfor %}
+    {% buttons %}
+    <button type="submit" class="btn btn-primary">
+        {% bootstrap_icon "star" %} Add
+    </button>
+    {% endbuttons %}
 </form>
+{% endblock %}
