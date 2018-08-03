@@ -6,7 +6,7 @@ from .models import User
 
 class ReviewAdmin(admin.ModelAdmin):
     model = Review
-    list_display = ('wine', 'rating', 'user')
+    list_display = ('wines', 'ratings', 'user')
     list_filter = ['rating']
     search_fields = ['body']
 
