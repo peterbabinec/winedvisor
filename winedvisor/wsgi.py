@@ -1,11 +1,4 @@
-"""
-WSGI config for winedvisor project.
 
-It exposes the WSGI callable as a module-level variable named ``application``.
-
-For mor information on this file, seee
-https://docs.djangoproject.com/en/1.10/howto/deployment/wsgi/
-"""
 
 import os
 
